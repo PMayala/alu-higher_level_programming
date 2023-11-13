@@ -1,75 +1,46 @@
 #!/usr/bin/python3
-"""Defines a Rectangle subclass Square."""
+"""Module 11-square"""
 
 
-class Square:
-    """Represent a square."""
-    def __init__(self, size=0):
-        """Initialize a new square.
+class BaseGeometry:
+    """Class BaseGeometry"""
+    def area(self):
+        """Area method (not implemented)"""
+        raise Exception("area() is not implemented")
 
-        Args:
-            size (int): The size of the new square.
-        """
-        self.__size = 0
-        self.size = size
-
-    @property
-    def size(self):
-        """Getter for size."""
-        return self.__size
-
-    @size.setter
-    def size(self, value):
-        """Setter for size."""
+    def integer_validator(self, name, value):
+        """Validate the value as an integer greater than 0"""
         if type(value) is not int:
-            raise TypeError("size must be an integer")
-        if value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+            raise TypeError("{} must be an integer".format(name))
+        if value <= 0:
+            raise ValueError("{} must be greater than 0".format(name))
+
+
+class Rectangle(BaseGeometry):
+    """Class Rectangle inherited from BaseGeometry"""
+    def __init__(self, width, height):
+        """Initializer with width and height"""
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
+        self.__width = width
+        self.__height = height
 
     def area(self):
-        """Calculate the area of the square."""
-        return self.__size * self.__size
+        """Calculate and return the area of the rectangle"""
+        return self.__width * self.__height
 
     def __str__(self):
-        """Return the string representation of the square."""
-        return "[Square] {}/{}".format(self.__size, self.__size)
+        """Return the string representation of the rectangle"""
+        return "[Rectangle] {}/{}".format(self.__width, self.__height)
 
-if __name__ == "__main__":
-    # Testing
-    print(dir(Square))
-    s = Square(4)
-    print(s.area())
-    s = Square(1411)
-    print(s.area())
-    s = Square(5)
-    print(s.area())
-    s = Square(781)
-    print(s)
-    s = Square(4)
-    print(s)
-    s = Square(5)
-    print(s)
-    try:
-        s = Square()
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
-    try:
-        s = Square([12, 52])
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
-    try:
-        s = Square(-35)
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
-    try:
-        s = Square(0)
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
-    try:
-        s = Square(5)
-        print(s.size)
-        print(s.width)
-        print(s.height)
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
+
+class Square(Rectangle):
+    """Class Square inherited from Rectangle"""
+    def __init__(self, size):
+        """Initializer with size"""
+        super().__init__(size, size)
+        self.integer_validator("size", size)
+
+    def __str__(self):
+        """Return the string representation of the square"""
+        return "[Square] {}/{}".format(self._Rectangle__width, self._Rectangle__height)
