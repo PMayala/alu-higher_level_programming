@@ -4,6 +4,7 @@
 
 class BaseGeometry:
     """Create a BaseGeometry instance"""
+
     def area(self):
         """Unimplemented method"""
         raise Exception("area() is not implemented")
