@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# test_rectangle.py
+# refer to models
 """Defines unittests for models/rectangle.py.
 
 Unittest classes:
